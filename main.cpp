@@ -61,43 +61,37 @@ int main(int, char**)
 
 
                 SDL_SetRenderDrawColor(ren.get(), 0, 0, 0, 0);
-                int radius = 100;
-                int x0=WIDTH/2;
-                int y0=HEIGHT/2;
-		int x=0;
-		int y=radius;
-		int delta = 1-2*radius;
-		int error = 0;
-
-                while (y>=0)
-		{
+                int x0=WIDTH/2, y0 = HEIGHT/2, radius = 50;
+                int x = 0;
+                int y = radius;
+                int delta = 1 - 2 * radius;
+                int error = 0;
+                while(y >= 0) {
                     SDL_RenderDrawPoint(ren.get(), x0 + x, y0 + y);
                     SDL_RenderDrawPoint(ren.get(), x0 + x, y0 - y);
                     SDL_RenderDrawPoint(ren.get(), x0 - x, y0 + y);
                     SDL_RenderDrawPoint(ren.get(), x0 - x, y0 - y);
 
-                    error = 2*(delta +y )-1;
-                    if (delta < 0 && error <= 0)
-                    {
+                    error = 2 * (delta + y) - 1;
+                    if(delta < 0 && error <= 0) {
                         ++x;
-                        delta += 2*x+1;
+                        delta += 2 * x + 1;
                         continue;
                     }
-
-                    error = 2*(delta - x)-1;
-                    if (delta > 0 && error > 0){
-                            --y;
-                            delta += 1-2*y;
+                    error = 2 * (delta - x) - 1;
+                    if(delta > 0 && error > 0) {
+                        --y;
+                        delta += 1 - 2 * y;
+                        continue;
                     }
                     ++x;
-                    delta +=2*(x-y);
-                    --y;
-
-
+                    delta += 2 * (x - y);
+                        --y;
                 }
-		SDL_RenderPresent(ren.get());
+                    SDL_RenderPresent(ren.get());
+                }
 
-	}
+
 
 	return 0;
 }
